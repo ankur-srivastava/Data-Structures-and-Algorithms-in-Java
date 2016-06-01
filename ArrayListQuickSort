@@ -1,0 +1,68 @@
+package impl;
+
+import java.util.ArrayList;
+
+/*
+ * Ankur Srivastava
+ * QuickSort Implementation using ArrayList for Sorting a sequence of Integers
+ * */
+
+public class ArrayListQuickSort {
+
+	public ArrayListQuickSort() { }
+
+	public static void main(String[] args) {
+		Utility.printList(sort(Utility.createMockList()));
+	}
+	
+	public static ArrayList<Integer> sort(ArrayList<Integer> input){
+		int size = input.size();
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		
+		if(size > 1){
+			int last = input.get(size-1);
+			
+			ArrayList<Integer> left = new ArrayList<Integer>();
+			ArrayList<Integer> right = new ArrayList<Integer>();
+			
+			for(int i=0;i<size;i++){
+				if(input.get(i) < last){
+					left.add(input.get(i));
+				}else if(input.get(i) > last){
+					right.add(input.get(i));
+				}
+			}
+			
+			//Utility.printList("left", left);
+			//Utility.printList("right", right);
+			
+			if(left != null && left.size() > 1){
+				left = sort(left);	
+			}
+			if(right != null && right.size() > 1){
+				right = sort(right);	
+			}
+			result = combine(left, last, right);
+		}
+		//Utility.printArray(result);
+		return result;
+	}
+	
+	public static ArrayList<Integer> combine(ArrayList<Integer> left, int center, ArrayList<Integer> right){
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		
+		if(!left.isEmpty()){
+			for(int i =0; i<left.size(); i++){
+				result.add(left.get(i));
+			}
+		}
+		result.add(center);
+		if(!right.isEmpty()){
+			for(int i = 0; i<right.size(); i++){
+				result.add(right.get(i));
+			}
+		}
+		//Utility.printList("merge", result);
+		return result;
+	}
+}
