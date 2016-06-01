@@ -1,0 +1,65 @@
+package impl;
+
+import java.util.ArrayList;
+
+public class ArrayListCharQS {
+
+	public ArrayListCharQS() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public static void main(String[] args) {
+		Utility.printCharList(sort(Utility.createMockCharList()));
+	}
+	
+	public static ArrayList<Character> sort(ArrayList<Character> input){
+		int size = input.size();
+		ArrayList<Character> result = new ArrayList<Character>();
+		
+		if(size > 1){
+			char last = input.get(size-1);
+			
+			ArrayList<Character> left = new ArrayList<Character>();
+			ArrayList<Character> right = new ArrayList<Character>();
+			
+			for(int i=0;i<size;i++){
+				if(input.get(i) < last){
+					left.add(input.get(i));
+				}else if(input.get(i) > last){
+					right.add(input.get(i));
+				}
+			}
+			
+			//Utility.printList("left", left);
+			//Utility.printList("right", right);
+			
+			if(left != null && left.size() > 1){
+				left = sort(left);	
+			}
+			if(right != null && right.size() > 1){
+				right = sort(right);	
+			}
+			result = combine(left, last, right);
+		}
+		//Utility.printArray(result);
+		return result;
+	}
+	
+	public static ArrayList<Character> combine(ArrayList<Character> left, char center, ArrayList<Character> right){
+		ArrayList<Character> result = new ArrayList<Character>();
+		
+		if(!left.isEmpty()){
+			for(int i =0; i<left.size(); i++){
+				result.add(left.get(i));
+			}
+		}
+		result.add(center);
+		if(!right.isEmpty()){
+			for(int i = 0; i<right.size(); i++){
+				result.add(right.get(i));
+			}
+		}
+		//Utility.printList("merge", result);
+		return result;
+	}
+}
