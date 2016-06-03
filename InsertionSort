@@ -1,0 +1,34 @@
+package impl;
+
+import java.util.Arrays;
+
+public class InsertionSortDemo {
+
+	public InsertionSortDemo() { }
+
+	public static void main(String[] args) {
+
+		//Steps - Input Array
+		//Find the right position for an element
+		int[] input = {6, 5, 3, 2, 7, 4, 1};
+		Utility.show("List to be Sorted");
+		Utility.show(Arrays.toString(input));
+		int currentElement=0;
+		
+		for(int i=1; i<input.length; i++){
+			currentElement = input[i];
+			int rightPosition = i;
+			for(int j=(i-1); j>=0; j--){
+				if(currentElement < input[j]){
+					rightPosition = j;
+					input[j+1] = input[j];
+				}
+			}
+			input[rightPosition] = currentElement;
+		}
+		Utility.show("After performing Insertion Sort");
+		Utility.show(Arrays.toString(input));
+		
+	}
+
+}
