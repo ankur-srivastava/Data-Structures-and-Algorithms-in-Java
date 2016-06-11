@@ -1,0 +1,25 @@
+package com.edocent.algorithms.demo;
+
+import com.edocent.algorithms.utility.MergeSort;
+
+/**
+ * Created by ankursrivastava on 6/11/16.
+ */
+public class MergeSortDemo {
+    public static void main(String[] a){
+        MergeSort mergeSort = new MergeSort();
+        int[] input = {7,5,8,6,4,2,9,1};
+        print("Pre Sorting  - ",input);
+        input = mergeSort.sort(input);
+        print("Post Sorting - ",input);
+
+    }
+
+    public static void print(String msg, int[] input){
+        System.out.print(msg+"  ");
+        for(int i=0; i<input.length;i++){
+            System.out.print(input[i]+" ");
+        }
+        System.out.println("");
+    }
+}
