@@ -1,0 +1,53 @@
+package com.edocent.algorithms.utility;
+
+import com.edocent.algorithms.demo.MergeSortDemo;
+
+import java.util.Arrays;
+
+/**
+ * Created by ankursrivastava on 6/11/16.
+ */
+public class MergeSort {
+
+    public int[] sort(int[] A){
+        int mid = 0;
+        if(A.length > 1){
+            mid = (int)Math.floor((A.length)/2);
+        }
+        if(A.length == 1 || mid == 0){
+            return A;
+        }else{
+            int[] left = sort(Arrays.copyOfRange(A, 0, mid));
+            int[] right = sort(Arrays.copyOfRange(A, mid, A.length));
+            return merge(left, right);
+        }
+    }
+
+    public int[] merge(int[] l, int[] r){
+        int[] temp = new int[l.length+r.length];
+        int li=0;
+        int ri=0;
+        int k=0;
+
+        while(li<l.length && ri<r.length){
+            if(l[li] < r[ri]){
+                temp[k] = l[li];
+                li++;
+            } else if(l[li] > r[ri]){
+                temp[k] = r[ri];
+                ri++;
+            }
+            k++;
+        }
+
+        for(int rl=li; rl<l.length;rl++){
+            temp[k] = l[rl];
+            k++;
+        }
+        for(int rr=ri; rr<r.length;rr++){
+            temp[k] = r[rr];
+            k++;
+        }
+        return temp;
+    }
+}
