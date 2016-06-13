@@ -1,0 +1,50 @@
+/**
+ * 
+ */
+package impl.datastructure;
+
+/**
+ * @author SRIVASTAVAA
+ * Algorithm Implementation 
+ */
+public class CountSort {
+
+	int[] input;
+	int size;
+	int max;
+	
+	public CountSort(int[] input) {
+		this.input = input;
+	}
+	
+	public void sort(){
+		size = input.length;
+		max = 6;
+		int[] b = new int[max+1];
+		int[] temp = new int[size+1];
+		
+		show("Input Seq",input);
+		for(int i=0; i<size; i++){
+			b[input[i]] = b[input[i]]+1;
+		}
+		show("Temp Seq",b);
+		for(int i=1; i<b.length;i++){
+			b[i] = b[i] + b[i-1];
+		}
+		show("Temp Seq",b);
+		for(int i=size-1; i>=0; i--){
+			temp[b[input[i]]] = input[i];
+			b[input[i]]--;
+		}
+		show("Sorted Seq",temp);
+	}
+	
+	public void show(String msg, int[] A){
+		System.out.println(" ");
+		System.out.print(msg+" ");
+		for(int i=0; i<A.length;i++){
+			System.out.print(A[i]+" ");
+		}
+		System.out.println(" ");
+	}
+}
